@@ -1,24 +1,25 @@
-import logo from './logo.svg';
+import {Provider} from 'react-redux'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import HomeNavbar from './components/HomeNavbar'
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Home from './pages/Home'
+import AddContact from './pages/AddContact'
+import DetailContact from './pages/DetailContact'
+import store from "./store/reducers"
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Router>
+        <HomeNavbar/>
+        <Switch>
+          <Route exact component={Home} path="/"/>
+          <Route component={AddContact} path="/addContact"/>
+          <Route component={DetailContact} path="/contact/:id"/>
+        </Switch>
+      </Router>
+    </Provider>
   );
 }
 
